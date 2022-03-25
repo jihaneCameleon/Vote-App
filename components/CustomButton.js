@@ -4,7 +4,7 @@ import React from 'react'
 const CustomButton = props => {
   return (
     <View style={styles.buttonContainer}>
-      <Button  title={props.btnText} color='dodgerblue' />
+      <Button  title={props.btnText} color='dodgerblue' onPress={props.onPress} />
     </View>
   )
 }

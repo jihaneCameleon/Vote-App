@@ -2,9 +2,11 @@ import { View, Text,TextInput,StyleSheet } from 'react-native'
 import React from 'react'
 
 const CustomInput = props=> {
+
+
   return (
     <View style={styles.container}>
-      <TextInput type placeholder={props.placeholder} style={styles.input} />
+      <TextInput type placeholder={props.placeholder} style={styles.input} onChangeText={props.onChangeText} secureTextEntry={props.secureEntry} />
     </View>
   )
 }

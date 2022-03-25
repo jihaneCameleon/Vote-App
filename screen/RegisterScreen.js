@@ -17,7 +17,7 @@ const RegisterScreen = () => {
       <CustomInput placeholder='Username' />
       <CustomInput placeholder='Email' />
       <CustomDatePicker/>
-      <CustomInput placeholder='Password' />
+      <CustomInput secureEntry={true} placeholder='Password' />
       <CustomButton btnText='Register' />
     </View>
   )

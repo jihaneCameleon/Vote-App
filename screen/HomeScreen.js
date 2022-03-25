@@ -1,13 +1,20 @@
-import { View, Text } from 'react-native'
+import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
-import CustomRedioGroup from '../components/CustomRedioGroup'
+import CustomRadioGroup from '../components/CustomRadioGroup'
 
 const HomeScreen = () => {
   return (
-    <View>
-      <CustomRedioGroup />
+    <View style={styles.container}>
+      <CustomRadioGroup />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    width:'100%'
+  }
+});
 
 export default HomeScreen
