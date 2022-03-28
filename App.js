@@ -1,20 +1,38 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './screen/LoginScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-     <LoginScreen/>
-    </View>
-  );
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import * as Font from 'expo-font';
+import 'react-native-gesture-handler';
+import  AppLoading  from 'expo-app-loading';
+import AppNavigator from './navigation/AppNavigator';
+
+const fetchFonts=()=>{
+  return Font.loadAsync({
+      'rubik':require('./assets/Fonts/RubikMonoOne-Regular.ttf'),
+      'voltaire':require('./assets/Fonts/Voltaire-Regular.ttf')
+  })
+
+  
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'whitesmoke',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+
+  const [fontLoaded,setFontLoaded]=useState(false);
+  console.log('fetch')
+  if(!fontLoaded){
+    return(
+      <AppLoading
+    startAsync={fetchFonts}
+    onFinish={() => setFontLoaded(true)}
+    onError={(err) => console.log(err)}
+      />
+    );
+  }
+  console.log('end fetch')
+
+  return <AppNavigator/>
+ 
+}
+
+

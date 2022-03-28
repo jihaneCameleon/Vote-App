@@ -3,15 +3,14 @@ import React,{useState} from 'react'
 import DatePicker from 'react-native-datepicker';
 
 
-const CustomDatePicker = () => {
+const CustomDatePicker = props => {
 
-  const [date, setDate] = useState('');
 
   return (
     <View style={styles.datePickercontainer} >
     <DatePicker
        style={styles.datePickerStyle}
-       date={date}
+       date={props.value}
        mode="date"
        placeholder="select date"
        format="DD/MM/YYYY"
@@ -33,9 +32,7 @@ const CustomDatePicker = () => {
          },
     
        }}
-       onDateChange={(date) => {
-         setDate(date);
-       }}
+       onDateChange={props.onChangeText}
      />
   </View>
   )

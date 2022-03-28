@@ -8,43 +8,39 @@ const LoginScreen = () => {
   const [username,setUsername]=useState('');
   const [password,setPassword]=useState('');
 
-  const[usernameIsValid,setUsernameIsValid]=useState(false);
-  const[passwordIsValid,setPasswordIsValid]=useState(false);
+
+  const [message,setMessage]=useState({
+    text:'',
+    color:''
+  });
 
 
-  const usernameHandler= text =>{
-    if(text.length===0){
-      setUsernameIsValid(false)
+  const fieldHandler= () =>{
+    if(!username.trim()){
+    setMessage({text:'Please set a valid username' ,color:'red'});
+  }
+
+  else if(!password.trim()){
+    setMessage({text:'Please set a valid password',color:'red'});
   }
   else{
-    setUsernameIsValid(true)
+    setMessage({text:'you are logged in',color:'green'})
   }
-  setUsername(text)
 
 }
 
-
-const passwordHandler= text =>{
-  if(text.length===0){
-    setPasswordIsValid(false)
-}
-else{
-  setPasswordIsValid(true)
-}
-setPassword(text)
-}
 
   return (
     <View style={styles.container} >
     <View style={styles.titleContainer}>
       <Text style={styles.title}>Login</Text>
     </View>
-    <CustomInput  placeholder='Username' value={username} onChangeText={usernameHandler} />
-    {!usernameIsValid && <Text style={styles.error} >Please set a valid title</Text>}
-    <CustomInput secureEntry={true}  placeholder='Password' value={password} onChangeText={passwordHandler} />
-    {!passwordIsValid && <Text style={styles.error} >Please set a valid password</Text>}
-    <CustomButton btnText='Login' />
+    <CustomInput  placeholder='Username' value={username} onChangeText={value=>setUsername(value)} />
     
+    <CustomInput secureEntry={true}  placeholder='Password' value={password} onChangeText={value=>setPassword(value)} />
+    
+    <CustomButton btnText='Login' onPress={fieldHandler} />
+    <Text style={{color:message.color}}>{message.text}</Text>
   </View>
   )
 }
