@@ -5,31 +5,8 @@ import { RadioButton } from 'react-native-paper';
 import { CheckBox,Input, } from 'react-native-elements';
 import CustomButton from '../components/CustomButton';
 import { color } from 'react-native-elements/dist/helpers';
+import { updateUser } from '../api/client';
 
-
-
-const radioButtonsData = 
-[
-{
-    id: '1', // acts as primary key, should be unique and non-empty string
-    label: 'Jihane',
-    value: 1
-}, {
-    id: '2',
-    label: 'Hicham',
-    value: 2
-},
-{
-    id: '3',
-    label: 'Youness',
-    value: 3
-},
-{
-    id: '4',
-    label: 'Ghita',
-    value: 4
-}
-]
 
 const CustomRadioGroup = () => {
 
@@ -45,6 +22,7 @@ const CustomRadioGroup = () => {
         setColor('red');
       }
       else{
+        updateUser({result:value});
         setMessage('Votre choix a éte envoyé')
         setColor('green')
       }

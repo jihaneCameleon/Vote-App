@@ -5,6 +5,7 @@ import CustomButton from '../components/CustomButton';
 import CustomDatePicker from '../components/CustomDatePicker';
 import Colors from '../constants/Colors';
 import Fonts  from '../constants/Fonts';
+import { addUser } from '../api/client';
 
 
 const RegisterScreen = props => {
@@ -20,6 +21,14 @@ const RegisterScreen = props => {
     color:''
   });
 
+  
+  const enteredData={
+    username:username,
+    email:email,
+    birthdate:birthDate,
+    password:password,
+    result:''
+  }
 
   const fieldHandler= () =>{
     if(!username.trim()){
@@ -39,12 +48,14 @@ const RegisterScreen = props => {
   }
 
   else{
-
+    addUser(enteredData);
     props.navigation.navigate({routeName:'Login',params:{
       successMessage:'you are successfully registered'
     }
     })
   }
+
+  
 
 }
 
@@ -61,7 +72,7 @@ const RegisterScreen = props => {
       <CustomDatePicker value={birthDate}  onChangeText={value=>setBirthDate(value)} />
       <CustomInput secureEntry={true} placeholder='Password'  value={password}  onChangeText={value=>setPassword(value)} />
       <CustomButton btnText='Register' onPress={fieldHandler} />
-      <Text style={styles.text}>Already a member? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Register'})}}> Sign In</Text></Text>
+      <Text style={styles.text}>Already a member? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Login'})}}> Sign In</Text></Text>
     </View>
   )
 }
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
       fontFamily:Fonts.secondary,
       fontSize:18,
     }
-    
+     
 });
 
 export default RegisterScreen;

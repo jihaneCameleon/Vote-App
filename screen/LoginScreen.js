@@ -1,9 +1,10 @@
 import { View, Text,StyleSheet,Button } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import CustomInput from '../components/CustomInput'
 import CustomButton from '../components/CustomButton'
 import Colors from '../constants/Colors';
 import Fonts  from '../constants/Fonts';
+import { fetchUser } from '../api/client';
 
 const LoginScreen = props => {
 
@@ -16,15 +17,32 @@ const LoginScreen = props => {
     color:''
   });
 
+  // must get the id and pass it to vote page
+  let dbUser;
+  let dbPassword;
+
+  useEffect(()=>{
+    async function getUser(){
+      const getUser=await fetchUser(username);
+      getUser.map(user=>{
+        dbUser=user.username;
+        dbPassword=user.password;
+       
+      })
+    }
+    getUser();
+  })
+
+  
+
   const successMessage=props.navigation.getParam('successMessage');
 
   const fieldHandler= () =>{
-
-    if(!username.trim()){
+    if(!username.trim() || username!=dbUser){
     setMessage({text:'Please set a valid username' ,color:'red'});
   }
 
-  else if(!password.trim()){
+  else if(!password.trim() || password!=dbPassword){
     setMessage({text:'Please set a valid password',color:'red'});
   }
   else{
@@ -38,19 +56,22 @@ const LoginScreen = props => {
 
   return (
     <View style={styles.container} >
-    <View style={styles.titleContainer}>
-      <Text style={styles.title}>Login</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Login</Text>
+        </View>
+
+        <Text style={{color:'green'}}>{successMessage}</Text>
+        <Text style={{color:message.color}}>{message.text}</Text>
+
+        <CustomInput  placeholder='Username' value={username} onChangeText={value=>setUsername(value)} />
+        
+        <CustomInput secureEntry={true}  placeholder='Password' value={password} onChangeText={value=>setPassword(value)} />
+        
+        <CustomButton btnText='Login' onPress={fieldHandler}  />
+        
+        <Text style={styles.text}>Not a member yet? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Register'})}}> Sign Up</Text></Text>
+
     </View>
-    <Text style={{color:'green'}}>{successMessage}</Text>
-    <Text style={{color:message.color}}>{message.text}</Text>
-    <CustomInput  placeholder='Username' value={username} onChangeText={value=>setUsername(value)} />
-    
-    <CustomInput secureEntry={true}  placeholder='Password' value={password} onChangeText={value=>setPassword(value)} />
-    
-    <CustomButton btnText='Login' onPress={fieldHandler}  />
-    
-    <Text style={styles.text}>Not a member yet? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Register'})}}> Sign Up</Text></Text>
-  </View>
   )
 }
 
