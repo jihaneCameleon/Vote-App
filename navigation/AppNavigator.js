@@ -7,18 +7,31 @@ import RegisterScreen from '../screen/RegisterScreen';
 import LoginScreen from '../screen/LoginScreen';
 import HomeScreen from '../screen/HomeScreen';
 
+import Colors from '../constants/Colors';
+import Fonts  from '../constants/Fonts';
+
+
 const AppNavigator = createStackNavigator({
 
-    Register:{
-        screen:RegisterScreen
-    },
     Login:{
         screen:LoginScreen
+    },
+    Register:{
+        screen:RegisterScreen
     },
     Home:{
         screen:HomeScreen
     }
-})
+},
+{
+    defaultNavigationOptions:{
+        headerStyle:{
+            backgroundColor:Colors.primary
+          },
+          headerTintColor:'white'
+    }
+}
+)
 
 
 export default createAppContainer(AppNavigator);

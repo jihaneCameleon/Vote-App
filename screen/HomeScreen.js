@@ -10,6 +10,10 @@ const HomeScreen = () => {
   )
 }
 
+HomeScreen.navigationOptions={
+  headerTitle:"Page de Vote"
+}
+
 const styles = StyleSheet.create({
   container:{
     flex:1,

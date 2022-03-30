@@ -50,29 +50,6 @@ const CustomRadioGroup = () => {
       }
     }
     
-    // const [male,setMale]= useState(false);
-    // const [female,setFemale]= useState(false);
-    // const [other,setOther]= useState(false);
-
-    // const genderMale=()=>{
-    //   setMale(true);
-    //   setFemale(false);
-    //   setOther(false);
-    // }
-
-    // const genderFemale=()=>{
-    //   setFemale(true);
-    //   setMale(false);
-    //   setOther(false);
-    // }
-
-    // const genderOther=()=>{
-    //   setOther(true);
-    //   setMale(false);
-    //   setFemale(false);
-    // }
-
-    
 
   return (
     <View style={styles.container}>
@@ -80,13 +57,6 @@ const CustomRadioGroup = () => {
         <Text style={styles.title}>Page de Vote</Text>
         </View>
         <View style={styles.radioGroupContainer}>
-        
-          {/* <CheckBox title="Male" center checked={male} checkedIcon="dot-circle-o" uncheckedIcon="circle-o" onPress={genderMale}  />
-
-          <CheckBox title="Female" center checked={female} checkedIcon="dot-circle-o" uncheckedIcon="circle-o" onPress={genderFemale}  />
-
-          <CheckBox title="Other" center checked={other} checkedIcon="dot-circle-o" uncheckedIcon="circle-o" onPress={genderOther}  /> */}
-         
      
         <RadioButton.Group onValueChange={value => setValue(value)} 
         value={value}>

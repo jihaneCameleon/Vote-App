@@ -3,9 +3,11 @@ import React,{useState} from 'react';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import CustomDatePicker from '../components/CustomDatePicker';
+import Colors from '../constants/Colors';
+import Fonts  from '../constants/Fonts';
 
 
-const RegisterScreen = () => {
+const RegisterScreen = props => {
 
   const [username,setUsername]=useState('');
   const [email,setEmail]=useState('');
@@ -37,7 +39,11 @@ const RegisterScreen = () => {
   }
 
   else{
-    setMessage({text:'you are logged in',color:'green'})
+
+    props.navigation.navigate({routeName:'Login',params:{
+      successMessage:'you are successfully registered'
+    }
+    })
   }
 
 }
@@ -49,14 +55,19 @@ const RegisterScreen = () => {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Inscription</Text>
       </View>
+      <Text style={{color:message.color}}>{message.text}</Text>
       <CustomInput placeholder='Username'  value={username}  onChangeText={value=>setUsername(value)} />
       <CustomInput placeholder='Email'  value={email}  onChangeText={value=>setEmail(value)} />
       <CustomDatePicker value={birthDate}  onChangeText={value=>setBirthDate(value)} />
       <CustomInput secureEntry={true} placeholder='Password'  value={password}  onChangeText={value=>setPassword(value)} />
       <CustomButton btnText='Register' onPress={fieldHandler} />
-      <Text  >{message.text}</Text>
+      <Text style={styles.text}>Already a member? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Register'})}}> Sign In</Text></Text>
     </View>
   )
+}
+
+RegisterScreen.navigationOptions={
+  headerTitle:"Page d'inscription"
 }
 
 const styles = StyleSheet.create({
@@ -68,13 +79,17 @@ const styles = StyleSheet.create({
       alignItems:'center',
     },
     titleContainer:{
-      flex:0.2
+      flex:0.5
     },
     title:{
       fontSize:30,
-      color:'midnightblue',
-      fontWeight:'bold'
+      color:Colors.primary,
+      fontFamily:Fonts.primary
     },
+    text:{
+      fontFamily:Fonts.secondary,
+      fontSize:18,
+    }
     
 });
 
