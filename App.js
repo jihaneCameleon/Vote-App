@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import 'react-native-gesture-handler';
 import  AppLoading  from 'expo-app-loading';
-import AppNavigator from './navigation/AppNavigator';
+import LoginScreen from './screen/LoginScreen';
 
 const fetchFonts=()=>{
   return Font.loadAsync({
@@ -31,7 +31,7 @@ export default function App() {
   }
   console.log('end fetch')
 
-  return <AppNavigator/>
+  return <LoginScreen/>
  
 }
 

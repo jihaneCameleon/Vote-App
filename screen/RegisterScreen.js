@@ -49,10 +49,10 @@ const RegisterScreen = props => {
 
   else{
     addUser(enteredData);
-    props.navigation.navigate({routeName:'Login',params:{
-      successMessage:'you are successfully registered'
-    }
-    })
+    // props.navigation.navigate({routeName:'Login',params:{
+    //   successMessage:'you are successfully registered'
+    // }
+    // })
   }
 
   
@@ -72,7 +72,7 @@ const RegisterScreen = props => {
       <CustomDatePicker value={birthDate}  onChangeText={value=>setBirthDate(value)} />
       <CustomInput secureEntry={true} placeholder='Password'  value={password}  onChangeText={value=>setPassword(value)} />
       <CustomButton btnText='Register' onPress={fieldHandler} />
-      <Text style={styles.text}>Already a member? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Login'})}}> Sign In</Text></Text>
+      {/* <Text style={styles.text}>Already a member? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Login'})}}> Sign In</Text></Text> */}
     </View>
   )
 }

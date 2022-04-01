@@ -41,7 +41,7 @@ const LoginScreen = props => {
 
   
 
-  const successMessage=props.navigation.getParam('successMessage');
+  // const successMessage=props.navigation.getParam('successMessage');
 
   const fieldHandler= () =>{
     if(!username.trim() || username!=data.username){
@@ -68,7 +68,7 @@ const LoginScreen = props => {
           <Text style={styles.title}>Login</Text>
         </View>
 
-        <Text style={{color:'green'}}>{successMessage}</Text>
+        {/* <Text style={{color:'green'}}>{successMessage}</Text> */}
         <Text style={{color:message.color}}>{message.text}</Text>
 
         <CustomInput  placeholder='Username' value={username} onChangeText={value=>setUsername(value)} />
@@ -77,7 +77,7 @@ const LoginScreen = props => {
         
         <CustomButton btnText='Login' onPress={fieldHandler}  />
         
-        <Text style={styles.text}>Not a member yet? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Register'})}}> Sign Up</Text></Text>
+        {/* <Text style={styles.text}>Not a member yet? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Register'})}}> Sign Up</Text></Text> */}
 
     </View>
   )
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
       alignItems:'center',
     },
     titleContainer:{
-      flex:0.5
+      flex:0.3
     },
     title:{
       fontSize:35,

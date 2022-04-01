@@ -9,9 +9,14 @@ import HomeScreen from '../screen/HomeScreen';
 
 import Colors from '../constants/Colors';
 import Fonts  from '../constants/Fonts';
+import TestScreen from '../screen/TestScreen';
 
 
 const AppNavigator = createStackNavigator({
+
+    Count:{
+        screen:TestScreen
+    },
 
     Login:{
         screen:LoginScreen

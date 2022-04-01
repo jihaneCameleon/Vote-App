@@ -4,7 +4,7 @@ import CustomRadioGroup from '../components/CustomRadioGroup'
 
 const HomeScreen = props => {
 
-  const data=props.navigation.getParam('data');
+  // const data=props.navigation.getParam('data');
 
   return (
     <View style={styles.container}>
