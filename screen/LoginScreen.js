@@ -18,16 +18,22 @@ const LoginScreen = props => {
   });
 
   // must get the id and pass it to vote page
-  let dbUser;
-  let dbPassword;
+  let data;
+  
 
   useEffect(()=>{
     async function getUser(){
       const getUser=await fetchUser(username);
       getUser.map(user=>{
-        dbUser=user.username;
-        dbPassword=user.password;
-       
+
+        data={
+          id:user.id,
+          username:user.username,
+          email:user.email,
+          password:user.password,
+          birthdate:user.birthdate
+        }
+       console.log(data)
       })
     }
     getUser();
@@ -38,15 +44,17 @@ const LoginScreen = props => {
   const successMessage=props.navigation.getParam('successMessage');
 
   const fieldHandler= () =>{
-    if(!username.trim() || username!=dbUser){
+    if(!username.trim() || username!=data.username){
     setMessage({text:'Please set a valid username' ,color:'red'});
   }
 
-  else if(!password.trim() || password!=dbPassword){
+  else if(!password.trim() || password!=data.password){
     setMessage({text:'Please set a valid password',color:'red'});
   }
   else{
-    props.navigation.navigate({routeName:'Home'})
+    props.navigation.navigate({routeName:'Home',params:{
+      data:data
+    }})
     
   }
 

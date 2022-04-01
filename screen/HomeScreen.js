@@ -2,10 +2,13 @@ import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
 import CustomRadioGroup from '../components/CustomRadioGroup'
 
-const HomeScreen = () => {
+const HomeScreen = props => {
+
+  const data=props.navigation.getParam('data');
+
   return (
     <View style={styles.container}>
-      <CustomRadioGroup />
+      <CustomRadioGroup data={data} />
     </View>
   )
 }

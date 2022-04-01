@@ -22,7 +22,8 @@ export async function fetchUser(username){
             id:key,
             username:response.data[key].username,
             email:response.data[key].email,
-            birthdate:new Date(response.data[key].birthdate),
+            result:response.data[key].result,
+            birthdate:response.data[key].birthdate,
             password:response.data[key].password
         };
         users.push(userObj);

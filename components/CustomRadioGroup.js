@@ -8,7 +8,7 @@ import { color } from 'react-native-elements/dist/helpers';
 import { updateUser } from '../api/client';
 
 
-const CustomRadioGroup = () => {
+const CustomRadioGroup = props => {
 
 
   
@@ -16,13 +16,21 @@ const CustomRadioGroup = () => {
     const [message,setMessage] = useState('');
     const [color,setColor] = useState('');
 
-    const formHandler=()=>{
+   
+
+    const data = props.data;
+    data.result=value;
+    const id =data.id;
+
+    
+
+    const formHandler= () =>{
       if(value===''){
         setMessage('vous devez choisir au moins un candidat!')
         setColor('red');
       }
       else{
-        updateUser({result:value});
+        updateUser(id,data);
         setMessage('Votre choix a éte envoyé')
         setColor('green')
       }
