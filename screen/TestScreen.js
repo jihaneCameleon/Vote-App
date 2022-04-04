@@ -48,4 +48,4 @@ const TestScreen = () => {
 
 //www.bigbinary.com/learn-react-native/handling-authentication-state-in-react-native
 
-export default TestScreen
+export default TestScreen;
