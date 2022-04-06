@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState ,useMemo} from 'react';
 import { StyleSheet, Text, View,ActivityIndicator } from 'react-native';
 import * as Font from 'expo-font';
 import 'react-native-gesture-handler';
@@ -10,6 +10,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Fonts from './constants/Fonts';
 import Colors from './constants/Colors';
+import Loading from './components/Loading';
+import HomeScreen from './screen/HomeScreen'
+import { AuthContext } from './components/Context';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +32,7 @@ export default function App() {
 
   const [fontLoaded,setFontLoaded]=useState(false);
   const [isLoding,setIsLoading]=useState(true);
+  const [userToken,setUserToken]=useState(null)
 
   if(!fontLoaded){
     return(
@@ -39,40 +44,72 @@ export default function App() {
     );
   }
 
+  const authContext=useMemo(()=>({
+    signIn:()=>{
+      setUserToken('abc')
+      setIsLoading(false)
+    },
+    signOut:()=>{
+      setUserToken(null)
+      setIsLoading(false)
+    },
+    signUp:()=>{
+      setUserToken('abc')
+      setIsLoading(false)
+    }
+  }))
+
+
+  if(isLoding){
+    return(
+        <Loading/>
+    )
+  }
+
   return (
-    <NavigationContainer>
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        {userToken != null ? (
 
+          <HomeScreen/>
+        )
+        :
         <Stack.Navigator
-        initialRouteName="Register"
-        screenOptions={{
-          headerTintColor: 'white',
-          headerStyle: { backgroundColor: Colors.primary },
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontSize:30
-          },
-        }}
-        >
-
-           <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ title: 'Login' }}
-          />
-         
-          <Stack.Screen
-            name="Register"
-            component={RegisterScreen}
-            options={{ 
-              title: 'Register',
-            }}
-          />
-
-        </Stack.Navigator>
-  
-    </NavigationContainer>
+          initialRouteName="Register"
+          screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: { backgroundColor: Colors.primary },
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontSize:30
+            },
+            headerShown: false
+          }}
+          >
+             <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ title: 'Login' }}
+            />
+      
+            <Stack.Screen
+              name="Register"
+              component={RegisterScreen}
+              options={{
+                title: 'Register',
+              }}
+            />
+          </Stack.Navigator>
+        }
+          
+      
+      </NavigationContainer>
+    </AuthContext.Provider>
   )
  
 }
+const styles = StyleSheet.create({
+
+});
 
 
