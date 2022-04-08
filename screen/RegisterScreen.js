@@ -51,10 +51,7 @@ const RegisterScreen = props => {
 
   else{
     addUser(enteredData);
-    props.navigation.navigate({
-      name: 'Login',
-      params: { successMessage: "You are successfully registered" },
-    });
+    props.navigation.navigate('Login');
   }
 
   
@@ -85,9 +82,6 @@ const RegisterScreen = props => {
   )
 }
 
-RegisterScreen.navigationOptions={
-  headerTitle:"Page d'inscription"
-}
 
 const styles = StyleSheet.create({
     container:{

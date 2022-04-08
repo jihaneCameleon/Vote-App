@@ -1,5 +1,5 @@
 
-import React, { useState ,useMemo} from 'react';
+import React, { useState ,useMemo,useEffect} from 'react';
 import { StyleSheet, Text, View,ActivityIndicator } from 'react-native';
 import * as Font from 'expo-font';
 import 'react-native-gesture-handler';
@@ -31,8 +31,8 @@ const fetchFonts=()=>{
 export default function App() {
 
   const [fontLoaded,setFontLoaded]=useState(false);
-  const [isLoding,setIsLoading]=useState(true);
-  const [userToken,setUserToken]=useState(null)
+  const [isLoding,setIsLoading]=useState(false);
+  const [userToken,setUserToken]=useState(null);
 
   if(!fontLoaded){
     return(
@@ -44,21 +44,6 @@ export default function App() {
     );
   }
 
-  const authContext=useMemo(()=>({
-    signIn:()=>{
-      setUserToken('abc')
-      setIsLoading(false)
-    },
-    signOut:()=>{
-      setUserToken(null)
-      setIsLoading(false)
-    },
-    signUp:()=>{
-      setUserToken('abc')
-      setIsLoading(false)
-    }
-  }))
-
 
   if(isLoding){
     return(
@@ -67,7 +52,7 @@ export default function App() {
   }
 
   return (
-    <AuthContext.Provider value={authContext}>
+    <AuthContext.Provider>
       <NavigationContainer>
         {userToken != null ? (
 

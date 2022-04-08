@@ -26,7 +26,7 @@ const CustomRadioGroup = props => {
 
     const formHandler= () =>{
       if(value===''){
-        setMessage('vous devez choisir au moins un candidat!')
+        setMessage('vous devez choisir un candidat!')
         setColor('red');
       }
       else{
