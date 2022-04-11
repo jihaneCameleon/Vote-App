@@ -1,10 +1,15 @@
 import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
 import CustomRadioGroup from '../components/CustomRadioGroup'
+import { useNavigation,useRoute} from '@react-navigation/native';
+
 
 const HomeScreen = props => {
 
-  // const data=props.navigation.getParam('data');
+  const navigation = useNavigation();
+  const route=useRoute();
+
+  const {data}=route.params;
 
   return (
     <View style={styles.container}>
