@@ -12,7 +12,7 @@ import Fonts from './constants/Fonts';
 import Colors from './constants/Colors';
 import Loading from './components/Loading';
 import HomeScreen from './screen/HomeScreen'
-import { AuthContext } from './components/Context';
+import { AuthProvider } from './AuthContext'; 
 
 
 const Stack = createNativeStackNavigator();
@@ -52,44 +52,46 @@ export default function App() {
   }
 
   return (
-    <AuthContext.Provider>
-      <NavigationContainer>
-        {userToken != null ? (
-
-          <HomeScreen/>
-        )
-        :
-        <Stack.Navigator
-          initialRouteName="Register"
-          screenOptions={{
-            headerTintColor: 'white',
-            headerStyle: { backgroundColor: Colors.primary },
-            headerTitleAlign: 'center',
-            headerTitleStyle: {
-              fontSize:30
-            },
-            headerShown: false
-          }}
-          >
-             <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{ title: 'Login' }}
-            />
-      
-            <Stack.Screen
-              name="Register"
-              component={RegisterScreen}
-              options={{
-                title: 'Register',
-              }}
-            />
-          </Stack.Navigator>
-        }
-          
-      
-      </NavigationContainer>
-    </AuthContext.Provider>
+      <AuthProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+              headerTintColor: 'white',
+              headerStyle: { backgroundColor: Colors.primary },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontSize:30
+              },
+              headerShown: false
+            }}
+            >
+               <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{ title: 'Login' }}
+              />
+        
+              <Stack.Screen
+                name="Register"
+                component={RegisterScreen}
+                options={{
+                  title: 'Register',
+                }}
+              />
+        
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  title: 'Home',
+                }}
+              />
+            </Stack.Navigator>
+        
+        
+        </NavigationContainer>
+      </AuthProvider>
   )
  
 }

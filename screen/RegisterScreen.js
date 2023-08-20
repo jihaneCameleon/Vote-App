@@ -6,11 +6,13 @@ import CustomDatePicker from '../components/CustomDatePicker';
 import Colors from '../constants/Colors';
 import Fonts  from '../constants/Fonts';
 import { addUser } from '../api/client';
-import { CommonActions } from '@react-navigation/native';
+import { useNavigation,useRoute} from '@react-navigation/native';
 
 
 
 const RegisterScreen = props => {
+
+  const navigation=useNavigation();
 
   const [username,setUsername]=useState('');
   const [email,setEmail]=useState('');
@@ -51,7 +53,9 @@ const RegisterScreen = props => {
 
   else{
     addUser(enteredData);
-    props.navigation.navigate('Login');
+    navigation.navigate('Login',
+      {registerMessage:"You are successfully registered"}
+    );
   }
 
   
@@ -73,9 +77,7 @@ const RegisterScreen = props => {
       <CustomButton btnText='Register' onPress={fieldHandler} />
       <Text style={styles.text}>Already a member? <Text style={{color:Colors.primary}} onPress={()=>{
 
-        props.navigation.navigate({
-          name: 'Login',
-        });
+        navigation.navigate('Login');
 
       }}> Sign In</Text></Text>
     </View>

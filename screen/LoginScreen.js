@@ -5,8 +5,16 @@ import CustomButton from '../components/CustomButton'
 import Colors from '../constants/Colors';
 import Fonts  from '../constants/Fonts';
 import { fetchUser } from '../api/client';
+import { useNavigation,useRoute} from '@react-navigation/native';
+import AuthContext from '../AuthContext'
+
 
 const LoginScreen = props => {
+
+  const {setAuth}=useContext(AuthContext);
+
+  const route=useRoute();
+  const navigation=useNavigation();
 
   const [username,setUsername]=useState('');
   const [password,setPassword]=useState('');
@@ -16,30 +24,15 @@ const LoginScreen = props => {
     text:'',
     color:''
   });
+  const[success,setSuccess]=useState(false);
 
   // must get the id and pass it to vote page
   let data;
   
 
-  useEffect(()=>{
-    async function getUser(){
-      const getUser=await fetchUser(username);
-      getUser.map(user=>{
 
-        data={
-          id:user.id,
-          username:user.username,
-          email:user.email,
-          password:user.password,
-          birthdate:user.birthdate
-        }
-       console.log(data)
-      })
-    }
-    getUser();
-  })
 
-  const registerMessage = props.route.params;
+  // const  {registerMessage}  = route.params;
 
   const fieldHandler= () =>{
     if(!username.trim() || username!=data.username){
@@ -49,8 +42,15 @@ const LoginScreen = props => {
   else if(!password.trim() || password!=data.password){
     setMessage({text:'Please set a valid password',color:'red'});
   }
-  else{
-    props.navigation.navigate('Home');
+  else{    
+      
+    
+    signIn(data.id);
+    console.log(token);
+    navigation.navigate('Home',{
+      data:data
+    });
+    
   }
 
 }
@@ -62,7 +62,7 @@ const LoginScreen = props => {
           <Text style={styles.title}>Login</Text>
         </View>
 
-        <Text style={{color:'green'}}>{registerMessage}</Text>
+        <Text style={{color:'green'}}></Text>
         <Text style={{color:message.color}}>{message.text}</Text>
 
         <CustomInput  placeholder='Username' value={username} onChangeText={value=>setUsername(value)} />
@@ -71,16 +71,12 @@ const LoginScreen = props => {
         
         <CustomButton btnText='Login' onPress={fieldHandler}  />
         
-        <Text style={styles.text}>Not a member yet? <Text style={{color:Colors.primary}} onPress={()=>{props.navigation.navigate({routeName:'Register'})}}> Sign Up</Text></Text>
+        <Text style={styles.text}>Not a member yet? <Text style={{color:Colors.primary}} onPress={()=>{navigation.navigate('Register')}}> Sign Up</Text></Text>
 
     </View>
   )
 }
 
-LoginScreen.navigationOptions={
-  headerTitle:"Page d'authentification",
-
-}
 
 
 const styles = StyleSheet.create({
